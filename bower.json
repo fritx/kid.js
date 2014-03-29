@@ -1,0 +1,22 @@
+{
+  "name": "kid.js",
+  "main": "index.js",
+  "version": "0.0.2",
+  "homepage": "https://github.com/homejs/kid.js",
+  "authors": [
+    "fritx <uxfritz@163.com>"
+  ],
+  "description": "Another Browser-side Module Loader.",
+  "keywords": [
+    "module",
+    "loader"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

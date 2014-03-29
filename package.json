@@ -1,5 +1,6 @@
 {
-  "name": "kid",
+  "name": "kid.js",
   "version": "0.0.2",
+  "private": true,
   "description": "Another Browser-side Module Loader."
 }
