@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+
+<script src="../index.js"></script>
+<script>
+  kid.config({
+    base: 'scripts/',
+    alias: {
+      'jquery': 'jquery/2.0.0/jquery.js',
+      'jquery.cookie': 'jquery.cookie/index.js'
+    }
+  });
+  kid.use(['jquery', 'jquery.cookie'], function () {
+    console.log($);
+    console.log($.cookie);
+  });
+</script>
+</body>
+</html>
