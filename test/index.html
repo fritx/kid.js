@@ -2,10 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Kid.js Test</title>
 </head>
 <body>
 
+<!-- load kid.js -->
 <script src="../index.js"></script>
 <script>
   kid.config({
@@ -16,6 +17,7 @@
     }
   });
   kid.use(['jquery', 'jquery.cookie'], function () {
+    // modules loaded
     console.log($);
     console.log($.cookie);
   });

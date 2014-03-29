@@ -7,27 +7,36 @@
   var KID_NAME = 'kid';
 
   var kid = {};
-  kid.callbacks = {};
-
-  var _options = {};
-  _options.base = '';
-  _options.alias = {
-    // name => path
+  var _callbacks = kid.callbacks = {
+    // uid  => fn
   };
 
-  function wrap(text, name) {
+  var _options = kid.options = {};
+  _options.base = '';
+  _options.alias = {
+    // alias => name
+  };
+
+  function registerCallback(fn) {
+    var uid = ('' + Math.random()).slice(2);
+    _callbacks[uid] = fn;
+    return uid;
+  }
+
+  function wrapScript(text, callback) {
+    var uid = registerCallback(callback);
     var _top = [
       ';(function(window){'
     ].join('');
     var _bottom = [
-      'window[\'', KID_NAME, '\'].callbacks[\'', name, '\']();\n',
-      'delete window[\'', KID_NAME, '\'].callbacks[\'', name, '\'];\n',
+      'window[\'', KID_NAME, '\'].callbacks[\'', uid, '\']();\n',
+      'delete window[\'', KID_NAME, '\'].callbacks[\'', uid, '\'];\n',
       '})(window);\n'
     ].join('');
-    return [_top, text, _bottom].join('\n')
+    return [_top, text, _bottom].join('\n');
   }
 
-  function load(url, callback) {
+  function loadOneScript(url, callback) {
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
     req.onreadystatechange = function () {
@@ -40,11 +49,28 @@
     req.send();
   }
 
-  function evaluate(text, name) {
+  function loadScripts(urls, callback) {
+    var pieces = [];
+    var total = urls.length;
+    var loaded = 0;
+    urls.forEach(function (url, i) {
+      loadOneScript(url, function (piece) {
+        // in order
+        pieces[i] = piece;
+        if (++loaded >= total) {
+          // all loaded
+          callback(pieces.join('\n'));
+        }
+      });
+    });
+  }
+
+  function parseScripts(text, callback) {
     var el = document.createElement('script');
-    el.innerHTML = wrap(text, name);
+    el.innerHTML = wrapScript(text, callback);
     document.getElementsByTagName('head')[0].appendChild(el);
   }
+
 
   // config
   kid.config = function (options) {
@@ -55,35 +81,15 @@
     }
   };
 
+
   // use
-  kid.use = function (deps, callback) {
-    var mods = [];
-    var len = deps.length;
-    var loaded = 0;
-    var evaludated = 0;
-    deps.forEach(function (dep, i) {
-      var path = _options.alias[dep] || dep;
-      var url = _options.base + path;
-      load(url, function (text) {
-        mods[i] = {
-          name: ('' + Math.random()).slice(2),
-          text: text
-        };
-        loaded++;
-        if (loaded >= len) {
-          // evaluate all
-          mods.forEach(function (mod, i) {
-            kid.callbacks[mod.name] = function () {
-              evaludated++;
-              if (evaludated >= len) {
-                return callback();
-              }
-              evaluate(mods[i + 1].text, mods[i + 1].name);
-            };
-          });
-          evaluate(mods[0].text, mods[0].name);
-        }
-      });
+  kid.use = function (names, callback) {
+    var urls = names.map(function (name) {
+      var path = _options.alias[name] || name;
+      return [_options.base, path].join('');
+    });
+    loadScripts(urls, function (text) {
+      parseScripts(text, callback);
     });
   };
 
