@@ -75,7 +75,7 @@
   // config
   kid.config = function (options) {
     for (var key in options) {
-      if (options.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(options, key)) {
         _options[key] = options[key];
       }
     }

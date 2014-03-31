@@ -5,11 +5,12 @@ Another Browser-side Module Loader.
 ## Kid.js vs Sea.js vs Require.js
 
 &nbsp; | Kid.js | Sea.js | Require.js
---- | --- | --- | ---
+:---: | :---: | :---: | :---:
 Style | \- | CMD | AMD
-Size | <1K | 6.8K | 15.2K
-Var | `kid` | `seajs` | `requirejs`
 IE-Comp | IE9+ | IE5.5+ | IE6+
+Var | `kid` | `seajs` | `requirejs`
+Size | <1K | 6.8K | 15.2K
+Dep-Repkg | No | Yes | Yes
 
 Kid.js implements only dynamically loading, no AMD/CMD.
 
