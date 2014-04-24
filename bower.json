@@ -1,6 +1,6 @@
 {
   "name": "kid.js",
-  "main": "index.js",
+  "main": "lib/kid.js",
   "version": "0.0.2",
   "homepage": "https://github.com/homejs/kid.js",
   "authors": [
