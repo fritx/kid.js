@@ -21,21 +21,27 @@ Kid.js implements only dynamically loading, no AMD/CMD.
 kid.config({
   base: 'scripts/',
   alias: {
+    'underscore': 'underscore.js',
     'jquery': 'jquery/2.0.0/jquery.js',
     'jquery.cookie': 'jquery.cookie/index.js'
   }
 });
+
+// they work asynchronously
+
 kid.use(['jquery', 'jquery.cookie'], function () {
-  // modules loaded
   console.log($);
   console.log($.cookie);
 });
+
+kid.use(['underscore'], function () {
+  console.log(_);
+});
 ```
 
-Also see [test/](test/).
+Also see [examples/](examples/).
 
 ## TODO
 
-- Also load less/css/coffee
-- More access with modules
+- Also load less/css/coffee (element onload)
 - Error handling
