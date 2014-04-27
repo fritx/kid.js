@@ -21,7 +21,7 @@ Kid.js implements only dynamically loading, no AMD/CMD.
 kid.config({
   base: 'scripts/',
   alias: {
-    'underscore': 'underscore.js',
+    'underscore': ['underscore.js', 'underscore.string.js'],
     'jquery': 'jquery/2.0.0/jquery.js',
     'jquery.cookie': 'jquery.cookie/index.js'
   }
@@ -36,6 +36,7 @@ kid.use(['jquery', 'jquery.cookie'], function () {
 
 kid.use(['underscore'], function () {
   console.log(_);
+  console.log(_.string);
 });
 ```
 
