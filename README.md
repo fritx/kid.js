@@ -4,13 +4,14 @@ Another Browser-side Module Loader.
 
 ## Kid.js vs Sea.js vs Require.js
 
-&nbsp; | Kid.js | Sea.js | Require.js
-:---: | :---: | :---: | :---:
-Style | \- | CMD | AMD
-IE-Comp | IE9+ | IE5.5+ | IE6+
-Var | `kid` | `seajs` | `requirejs`
-Size | <1K | 6.8K | 15.2K
-Dep-Repkg | No | Yes | Yes
+| &nbsp; | Kid.js | Sea.js | Require.js |
+| :---: | :---: | :---: | :---: |
+| Style | \- | CMD | AMD |
+| IE Comp | IE9+ | IE5.5+ | IE6+ |
+| Symbol | `kid` | `seajs` | `require` |
+| Size | <1K | 6.8K | 15.2K |
+| Strict Block | No | Yes | Yes |
+| Dep Repack | No | Yes | Yes |
 
 Kid.js implements only dynamically loading, no AMD/CMD.
 
@@ -31,10 +32,10 @@ kid.use(['jquery', 'jquery.cookie'], function () {
 });
 ```
 
-Also see [test/](https://github.com/homejs/kid.js/tree/master/test).
+Also see [test/](test/).
 
 ## TODO
 
-- Better browser compatibility
 - Also load less/css/coffee
-- Add `kid.modules`
+- More access with modules
+- Error handling
