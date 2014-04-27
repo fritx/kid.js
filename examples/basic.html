@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Kid.js Test</title>
+  <title>Kid.js Example</title>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
   kid.config({
     base: 'scripts/',
     alias: {
-      'underscore': 'underscore.js',
+      'underscore': ['underscore.js', 'underscore.string.js'],
       'jquery': 'jquery/2.0.0/jquery.js',
       'jquery.cookie': 'jquery.cookie/index.js'
     }
@@ -28,6 +28,7 @@
 
   kid.use(['underscore'], function () {
     console.log(_);
+    console.log(_.string);
   });
 
 </script>
