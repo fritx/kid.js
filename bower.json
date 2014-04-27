@@ -1,11 +1,8 @@
 {
   "name": "kid.js",
   "main": "lib/kid.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/homejs/kid.js",
-  "authors": [
-    "fritx <uxfritz@163.com>"
-  ],
   "description": "Another Browser-side Module Loader.",
   "keywords": [
     "module",
